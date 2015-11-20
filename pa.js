@@ -1,20 +1,25 @@
 var http = require('http')
 var cheerio = require('cheerio')
-var url  = "http://www.xigangmall.com"
+var url  = "http://list.jd.com/list.html?cat=670,677,678"
 function filterChapter(html){
 	var $ = cheerio.load(html)
-	var chapters = $('.ind_pro_tit')
-	// [
-	// 	goodsname:''
-	// ]
-	var goodsnames =[]
-	chapters.each(function(item){
+	var pingjia = $('.tab-content-item')
+	
+	
+
+	
+	var goods=[]
+	pingjia.each(function(item,i){
 		var chapter = $(this)
-		var goodname = chapter.find('a').text()
-		
-		goodsnames.push({goodname})
+		var pingjias = chapter.find('a').text()
+		var bb = pingjias.replace("加入购物车","")
+		var goodss={
+			pingjias: bb
+		}
+		goods.push(goodss)
 	})
-	return goodsnames	
+	
+	return goods	
 }
 
 
